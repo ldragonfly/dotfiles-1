@@ -52,14 +52,7 @@ fi
 
 # install tmux
 if [ ! $(command -v tmux) ]; then
-    INSTALL_TMUX_GIT=true
-else
-    TMUX_VERSION=$(tmux -V | grep -o -P "\d+(\.\d+)?" | head -1)
-    INSTALL_TMUX_GIT=$(zsh -c "autoload is-at-least; is-at-least 2.4 $TMUX_VERSION || echo true")
-fi
-
-if [ -n "$INSTALL_TMUX_GIT" ]; then
-    echo "installing tmux from git.."
+    echo "installing tmux.."
 
     # install build prerequisites
     if [ -x $(command -v apt) ]; then
