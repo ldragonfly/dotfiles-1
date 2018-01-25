@@ -95,6 +95,10 @@ set laststatus=2
 set ruler
 set hlsearch
 
+if has("termguicolors")
+    set termguicolors
+endif
+
 set completeopt-=preview
 colorscheme base16-tomorrow-night
 "
