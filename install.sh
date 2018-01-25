@@ -47,7 +47,7 @@ if [ ! $(command -v nvim) ]; then
     fi
 
     git clone https://github.com/neovim/neovim neovim
-    sh -c "cd neovim; make -j$MAX_THREAD_COUNT; sudo make install"
+    sh -c "cd neovim; make -j$MAX_THREAD_COUNT CMAKE_BUILD_TYPE=RelWithDebInfo; sudo make install"
 fi
 
 # install tmux
