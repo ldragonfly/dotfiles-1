@@ -73,8 +73,8 @@ imap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 "
 " Separated python host
 "
-let g:python_host_prog='~/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog='~/.pyenv/versions/neovim3/bin/python3'
+let g:python_host_prog=expand('~/.pyenv/versions/neovim2/bin/python')
+let g:python3_host_prog=expand('~/.pyenv/versions/neovim3/bin/python3')
 "
 " --------------------------------------------------------------------------------------------------
 
