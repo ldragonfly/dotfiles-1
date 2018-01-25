@@ -69,7 +69,7 @@ if [ -n "$INSTALL_TMUX_GIT" ]; then
     fi
 
     git clone https://github.com/tmux/tmux tmux
-    sh -c "cd tmux; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
+    sh -c "cd tmux; sh autogen.sh; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
 fi
 
 cp $DOTFILES_DIR/init.vim $HOME/.config/nvim/init.vim
