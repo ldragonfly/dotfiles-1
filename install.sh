@@ -1,5 +1,6 @@
 # Constants
 MAX_THREAD_COUNT=$(grep -c ^processor /proc/cpuinfo)
+DOTFILES_DIR=$(realpath $(dirname "$0"))
 
 # Get sudo credential at the start of the script.
 sudo true
@@ -15,7 +16,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # install dircolors-solarized
 if [ ! -d dircolors-solarized ]; then
     git clone https://github.com/seebi/dircolors-solarized dircolors-solarized
-    echo "eval \$(dircolors -b \$HOME/package/dircolors-solarized/dircolors.ansi-dark)\n" >> $HOME/.zshrc
 fi
 
 # install pyenv
@@ -48,7 +48,6 @@ if [ ! $(command -v nvim) ]; then
 
     git clone https://github.com/neovim/neovim neovim
     sh -c "cd neovim; make -j$MAX_THREAD_COUNT; sudo make install"
-    echo "alias vim=nvim\n" >> $HOME/.zshrc
 fi
 
 # install tmux
@@ -73,6 +72,19 @@ if [ -n "$INSTALL_TMUX_GIT" ]; then
     sh -c "cd tmux; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
 fi
 
+cp $DOTFILES_DIR/init.vim $HOME/.config/nvim/init.vim
+cp $DOTFILES_DIR/tmux.conf $HOME/.tmux.conf
+cp $DOTFILES_DIR/zshrc $HOME/.zshrc.didrod
+
+# check if ~/.zshrc has line matching "source ~/.zshrc.didrod"
+# if not, append it to the last line of the file
+zsh -c \
+"
+if ! [[ \$(cat ~/.zshrc) =~ (^|\$'\\n')\\\\s*source\\ ~\\/\\.zshrc\\.didrod\\\\s*(\$|\$'\\n') ]]; then
+    echo 'source ~/.zshrc.didrod' >> ~/.zshrc
+fi
+"
+
 PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
@@ -89,3 +101,6 @@ if [ ! -d $HOME/.pyenv/versions/neovim3 ]; then
     pyenv activate neovim3
     pip install neovim
 fi
+
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
