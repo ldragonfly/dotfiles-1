@@ -100,6 +100,6 @@ if has("termguicolors")
 endif
 
 set completeopt-=preview
-colorscheme base16-tomorrow-night
+colorscheme base16-monokai
 "
 " --------------------------------------------------------------------------------------------------
