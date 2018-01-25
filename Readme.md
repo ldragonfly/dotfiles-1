@@ -8,7 +8,7 @@
 
 ## Supported Environment
 One of the followings
-* Windows 10, version 1709 or later with WSL enabled
+* Windows 10, version 1709 or later with WSL-ubuntu enabled
 * Ubuntu 16.04 or later
 * Arch linux
 
@@ -21,4 +21,5 @@ One of the followings
     ./install.sh
     ```
 1. Set your terminal's font to be one of the [powerline-fonts derivative](https://github.com/powerline/fonts#font-families)
-1. Set your terminal's color scheme to [tomorrow-night](https://github.com/chriskempson/tomorrow-theme)
+1. Set your terminal's color scheme to be your favorite. if you use gnome-terminal,
+    you can check out [base16-gnome-terminal](https://github.com/aaron-williamson/base16-gnome-terminal)
