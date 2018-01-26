@@ -5,10 +5,10 @@ DOTFILES_DIR=$(realpath $(dirname "$0"))
 # Get sudo credential at the start of the script.
 sudo true
 
-if [ ! -d $HOME/package ]; then
-	mkdir $HOME/package
+if [ ! -d $HOME/.didrod-dotfile-packages ]; then
+	mkdir $HOME/.didrod-dotfile-packages
 fi
-cd $HOME/package
+cd $HOME/.didrod-dotfile-packages
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
