@@ -50,8 +50,21 @@ if [ ! $(command -v nvim) ]; then
     sh -c "cd neovim; make -j$MAX_THREAD_COUNT CMAKE_BUILD_TYPE=RelWithDebInfo; sudo make install"
 fi
 
-# install tmux
+# check if we should install tmux
 if [ ! $(command -v tmux) ]; then
+    INSTALL_TMUX=true
+else
+    # if tmux is already installed, check its version
+    TMUX_VERSION=$(tmux -V | grep -o -P "\d+(\.\d+)?" | head -1)
+    if [ -z "$TMUX_VERSION" ]; then
+        INSTALL_TMUX=true
+    else
+        INSTALL_TMUX=$(zsh -c "autoload is-at-least; is-at-least 2.6 $TMUX_VERSION || echo true")
+    fi
+fi
+
+# install tmux
+if [ -n "$INSTALL_TMUX" ]; then
     echo "installing tmux.."
 
     # install build prerequisites
@@ -61,8 +74,16 @@ if [ ! $(command -v tmux) ]; then
         sudo pacman -S libevent ncurses
     fi
 
-    git clone https://github.com/tmux/tmux tmux
-    sh -c "cd tmux; sh autogen.sh; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
+    # download tmux tarball
+    # https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
+    rm -rf tmux*
+    curl -s https://api.github.com/repos/tmux/tmux/releases/latest \
+        | grep "browser_download_url.*tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -i - -O tmux.tar.gz
+    tar xvf tmux.tar.gz
+    sh -c "cd tmux-*; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
 fi
 
 cp $DOTFILES_DIR/init.vim $HOME/.config/nvim/init.vim
