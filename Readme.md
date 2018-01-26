@@ -24,3 +24,7 @@ One of the followings
 1. Set your terminal's font to be one of the [powerline-fonts derivative](https://github.com/powerline/fonts#font-families)
 1. Set your terminal's color scheme to be your favorite. if you use gnome-terminal,
     you can check out [base16-gnome-terminal](https://github.com/aaron-williamson/base16-gnome-terminal)
+
+## Note: Be sure tmux version is older than 2.6
+If it's not, manually reinstall newest version of tmux, or just uninstall it. `./install.sh` will automatically
+download tmux from their github repository, and compile it for you.
