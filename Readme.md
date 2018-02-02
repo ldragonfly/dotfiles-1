@@ -5,7 +5,7 @@
 * Terminal emulator (hopefully with true color support)
 * `zsh`
 * `git`
-* Common build packages. (`build-dependencies` for ubuntu-like, `base-devel` for arch-like)
+* Common build packages. (`build-essential` for ubuntu-like, `base-devel` for arch-like)
 
 ## Supported Environment
 One of the followings
