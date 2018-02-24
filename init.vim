@@ -9,6 +9,7 @@ Plug 'w0rp/ale'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'eagletmt/neco-ghc'
 
 call plug#end()
 
@@ -36,6 +37,15 @@ let g:deoplete#enable_at_startup = 1
 
 " --------------------------------------------------------------------------------------------------
 "
+" Neco-ghc
+"
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+"
+" --------------------------------------------------------------------------------------------------
+
+
+" --------------------------------------------------------------------------------------------------
+"
 " ALE
 "
 let g:ale_sign_column_always = 1
@@ -43,6 +53,10 @@ let g:ale_sign_column_always = 1
 highlight ALEError ctermbg=none cterm=underline
 highlight ALEWarning ctermbg=none cterm=underline
 highlight clear SignColumn
+
+let g:ale_linters = {
+\   'haskell': ['stack-build', 'stack-ghc-mod', 'hlint', 'hdevtools'],
+\}
 "
 " --------------------------------------------------------------------------------------------------
 
