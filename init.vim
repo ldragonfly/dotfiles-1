@@ -6,11 +6,9 @@ Plug 'chriskempson/base16-vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'w0rp/ale'
-Plug 'fatih/vim-go'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
-Plug 'zchee/deoplete-go', {'do': 'make'}
 
 call plug#end()
 
