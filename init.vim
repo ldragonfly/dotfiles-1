@@ -11,6 +11,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-clang'
 Plug 'eagletmt/neco-ghc'
 
 call plug#end()
@@ -33,6 +34,8 @@ let g:airline_powerline_fonts = 1
 " Deoplete
 "
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang/3.8.0/include'
 "
 " --------------------------------------------------------------------------------------------------
 
