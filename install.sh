@@ -5,17 +5,30 @@ DOTFILES_DIR=$(realpath $(dirname "$0"))
 # Get sudo credential at the start of the script.
 sudo true
 
-if [ ! -d $HOME/.didrod-dotfile-packages ]; then
-	mkdir $HOME/.didrod-dotfile-packages
+if [ ! $(command -v zsh) ]; then
+    sudo apt install zsh
 fi
-cd $HOME/.didrod-dotfile-packages
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# install dircolors-solarized
-if [ ! -d dircolors-solarized ]; then
-    git clone https://github.com/seebi/dircolors-solarized dircolors-solarized
+# install base16-shell (terminal color theme)
+if [ ! -d $HOME/.config/base16-shell ]; then
+    git clone https://github.com/chriskempson/base16-shell ~/.config/base16-shell
+
+    echo -e '\n# Base16 Shell' >> ~/.zshrc
+    echo 'BASE16_SHELL="HOME/.config/base16-shell"' >> ~/.zshrc
+    echo '[ -n "$PS1" ] && \' >> ~/.zshrc
+    echo '    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \' >> ~/.zshrc
+    echo '        eval "$("$BASE16_SHELL/profile_helper.sh")"' >> ~/.zshrc
+    echo 'base16_google-dark' >> ~/.zshrc
+fi
+
+if [ ! -d $HOME/.config/fonts ]; then
+    # clone
+    git clone https://github.com/powerline/fonts.git $HOME/.config/fonts --depth=1
+    # install
+    sh $HOME/.config/fonts/install.sh
 fi
 
 # install pyenv
@@ -86,16 +99,17 @@ if [ -n "$INSTALL_TMUX" ]; then
     sh -c "cd tmux-*; ./configure; make -j$MAX_THREAD_COUNT; sudo make install"
 fi
 
+if [ ! -d $HOME/.config/nvim ]; then
+    mkdir -p $HOME/.config/nvim
+fi
 cp $DOTFILES_DIR/init.vim $HOME/.config/nvim/init.vim
 cp $DOTFILES_DIR/tmux.conf $HOME/.tmux.conf
-cp $DOTFILES_DIR/zshrc $HOME/.zshrc.didrod
+cp $DOTFILES_DIR/zshrc $HOME/.zshrc.lyhan
 
-# check if ~/.zshrc has line matching "source ~/.zshrc.didrod"
-# if not, append it to the last line of the file
 zsh -c \
 "
-if ! [[ \$(cat ~/.zshrc) =~ (^|\$'\\n')\\\\s*source\\ ~\\/\\.zshrc\\.didrod\\\\s*(\$|\$'\\n') ]]; then
-    echo 'source ~/.zshrc.didrod' >> ~/.zshrc
+if ! [[ \$(cat ~/.zshrc) =~ (^|\$'\\n')\\\\s*source\\ ~\\/\\.zshrc\\.lyhan\\\\s*(\$|\$'\\n') ]]; then
+    echo 'source ~/.zshrc.lyhan' >> ~/.zshrc
 fi
 "
 

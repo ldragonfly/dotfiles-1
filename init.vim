@@ -8,20 +8,11 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-
-"Plug 'w0rp/ale'
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'zchee/deoplete-jedi'
-"Plug 'zchee/deoplete-clang'
-"Plug 'tweekmonster/deoplete-clang2'
-"Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
 "Plug 'liuchengxu/vista.vim'
-
 
 Plug 'majutsushi/tagbar'
 Plug 'ronakg/quickr-cscope.vim'
@@ -44,24 +35,6 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
 let g:NERDTreeFirst = 1
 " -------------------------------------------------------------------------------
-
-"--------------------------------------------------------------------------------
-" ALE
-let g:ale_sign_column_always = 1
-
-highlight ALEError ctermbg=none cterm=underline
-highlight ALEWarning ctermbg=none cterm=underline
-highlight clear SignColumn
-"--------------------------------------------------------------------------------
-
-"--------------------------------------------------------------------------------
-" Deoplete
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so'
-"let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang/6.0.0/include'
-"let g:deoplete#sources#clang2#clang_complete_database = '/home/lyhan12/workspace/vins/build/'
-"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-"--------------------------------------------------------------------------------
 
 "--------------------------------------------------------------------------------
 " Custom Key Mapping
@@ -139,41 +112,41 @@ function! CloseBuffer()
   exe 'tabnext ' . curTab
 endfunction
 "--------------------------------------------------------------------------------
-
-let g:asyncomplete_auto_popup = 0
-let g:lsp_signature_help_enabled = 0
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB> 
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-inoremap  <C-s> <Esc>:LspSignatureHelp<CR>a
-nnoremap  <C-s> :LspSignatureHelp<CR>
-
-if executable('gopls')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-  autocmd BufWritePre *.go LspDocumentFormatSync
-endif
-if executable('go-langserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
-  autocmd BufWritePre *.go LspDocumentFormatSync
-endif
-
+"
+"let g:asyncomplete_auto_popup = 0
+"let g:lsp_signature_help_enabled = 0
+"
+"function! s:check_back_space() abort
+"    let col = col('.') - 1
+"    return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+"
+"inoremap <silent><expr> <TAB> 
+"  \ pumvisible() ? "\<C-n>" :
+"  \ <SID>check_back_space() ? "\<TAB>" :
+"  \ asyncomplete#force_refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+"inoremap  <C-s> <Esc>:LspSignatureHelp<CR>a
+"nnoremap  <C-s> :LspSignatureHelp<CR>
+"
+"if executable('gopls')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'gopls',
+"        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+"        \ 'whitelist': ['go'],
+"        \ })
+"  autocmd BufWritePre *.go LspDocumentFormatSync
+"endif
+"if executable('go-langserver')
+"  au User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-langserver',
+"        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+"        \ 'whitelist': ['go'],
+"        \ })
+"  autocmd BufWritePre *.go LspDocumentFormatSync
+"endif
+"
 "--------------------------------------------------------------------------------
 " Other Setting
 set nu
@@ -193,4 +166,4 @@ set completeopt-=preview
 if has("termguicolors")
   set termguicolors
 endif
-colorscheme base16-monokai
+colorscheme base16-google-dark
