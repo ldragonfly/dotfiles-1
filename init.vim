@@ -56,6 +56,11 @@ noremap <C-j> :bprevious<Enter>
 noremap <C-k> :bnext<Enter>
 noremap <C-\> :call CloseBuffer()<CR>
 
+tnoremap <C-w> <C-\><C-n><C-w>
+tnoremap <C-\> <C-d>
+
+autocmd FileType python noremap <buffer><silent><C-x> :CocCommand python.execSelectionInTerminal<CR>
+
 "nnoremap ; :FZF ~<CR>
 "--------------------------------------------------------------------------------
 
