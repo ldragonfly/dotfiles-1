@@ -45,8 +45,9 @@ let g:NERDTreeFirst = 1
 
 "--------------------------------------------------------------------------------
 " Custom Key Mapping
-noremap <silent> <expr> <C-n> g:NERDTreeFirst ? "\:let g:NERDTreeFirst = 0<CR> \:NERDTree<CR>" : g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" :
-  \ bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+"noremap <silent> <expr> <C-n> g:NERDTreeFirst ? "\:let g:NERDTreeFirst = 0<CR> \:NERDTree<CR>" : g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" :
+"  \ bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+noremap <silent> <C-n> : :CocCommand explorer<CR>
 noremap <C-h> :set hlsearch!<CR>
 noremap <silent> <F8> :Vista!!<CR>
 noremap <silent> . :Vista finder<CR>
@@ -144,7 +145,12 @@ function! CloseBuffer()
 endfunction
 
 "--------------------------------------------------------------------------------
-" coc.nviv setting
+" coc.nvim setting
+
+let g:LanguageClient_serverCommands = {
+    \ 'sh': ['bash-language-server', 'start']
+    \ }
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
