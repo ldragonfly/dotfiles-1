@@ -1,5 +1,3 @@
-# didrod's dotfiles
-
 ## Prerequisites
 * [Powerline fonts](https://github.com/powerline/fonts)
 * Terminal emulator (hopefully with true color support)
